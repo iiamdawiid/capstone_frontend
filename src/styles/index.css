@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+
+.glow-btn {
+    transition: box-shadow 0.3s ease;
+}
+
+.glow-btn:hover {
+    box-shadow: 0 0 5px 3px white;
+}
+
+.reg-login-help {
+    text-decoration: underline;
+}
+
+.reg-login-help:hover {
+    color: rgb(0, 255, 47)
+}
+
+.registration-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+}
+
+.form-container {
+    width: 60%;
+    padding: 20px;
+}
+
+.form-container h1 {
+    font-size: 50px;
+    color: white;
+    text-shadow: 3px 3px 5px #4f46e5;
+}
+
+.form-container h5 {
+    font-size: 19px;
+}
+
+.info-container {
+    width: 40%;
+    padding: 20px;
+    background-image: linear-gradient(180deg, #4f46e5, rgb(0, 242, 255));
+}
+
+.info-container h1 {
+    font-size: 40px;
+    color: white;
+    text-shadow: 3px 3px 5px #a200ff;
+}
+
+.info-container p {
+    font-size: 20px;
+    color: white;
+}
+
+.reg-btn-login {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+}
+
+.reg-btn-login:hover {
+    background-color: #4f46e5;
+}
+
+.reg-form input {
+    width: 600px;
+}
+
+
+.horizontal-line {
+    display: flex;
+    align-items: center;
+    width: 45%;
+}
+
+.horizontal-line .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #868686;
+    margin: 0 10px;
+    content: "";
+}
+
+.horizontal-line .or {
+    color: #868686;
+    font-weight: bold;
+    margin: 0 10px;
+}
