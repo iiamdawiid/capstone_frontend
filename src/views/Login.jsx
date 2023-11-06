@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { userContext } from '../userContext';
+import { auth, provider } from '../firebaseConfig';
+import { signInWithPopup } from 'firebase/auth';
+import toast from 'react-hot-toast';
 
 export default function Login() {
     const { user, setUser } = useContext(userContext)
-
-    const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -23,22 +24,34 @@ export default function Login() {
                 withCredentials: true
             },
             body: JSON.stringify({
-                "email": email,
                 "username": username,
                 "password": password
             })
         });
-        setUser(username)
-        console.log('user logged in', user)
+        if (response.ok) {
+            setUser(username);
+            localStorage.setItem("user", username)
+            toast.success(`Logged in! Welcome back ${username}`);
+        } else {
+            toast.error("Incorrect login credentials.")
+        }
     }
-    
+
+    const handleGoogleLogin = async () => {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user.displayName;
+        setUser(user);
+        localStorage.setItem("user", user)
+        toast.success(`Logged in! Welcome back ${user}`);
+    }
+
     return (
         <div className="registration-container">
             <div className="form-container mb-28" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                 {/* registration form here */}
                 <h1 className='mb-5'>Login to Your Account</h1>
                 <h5>Login using Google</h5>
-                <i className="fa-brands fa-google-plus fa-3x mb-7 mt-7 google-icon" style={{ color: '#ff4d00' }}></i>
+                <button onClick={handleGoogleLogin}><i className="fa-brands fa-google-plus fa-3x mb-7 mt-7 google-icon" style={{ color: '#ff4d00' }}></i></button>
                 <div className="horizontal-line mb-5">
                     <div className="line"></div>
                     <div className="or">OR</div>
@@ -54,13 +67,13 @@ export default function Login() {
                     </div> */}
                     <div>
                         <label htmlFor="username" className="block text-sm font-medium text-primary-content mt-9">
-                            Username 
+                            Username
                         </label>
                         <input onChange={(e) => setUsername(e.target.value)} type="text" name="username" id="username" className="input input-bordered input-info max-w-md mt-2" />
                     </div>
                     <div className="mb-4">
                         <label htmlFor="password" className="block text-sm font-medium text-primary-content mt-10">
-                            Password 
+                            Password
                         </label>
                         <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" className="input input-bordered input-info max-w-md mt-2" />
                     </div>
