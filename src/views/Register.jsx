@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react"
 import { userContext } from '../userContext';
+import toast from 'react-hot-toast';
 
 export default function Register() {
     const { user } = useContext(userContext);
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -36,6 +38,8 @@ export default function Register() {
             });
             // const data = await response.json();
             // console.log(data);
+            navigate('/login');
+            toast.success("Success! Account has been created");
         }
     }
 

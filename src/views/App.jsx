@@ -6,6 +6,10 @@ import Login from './Login';
 import { userContext } from '../userContext';
 import React, { useState, useMemo } from 'react';
 import { Toaster } from 'react-hot-toast';
+import Home from './Home';
+import BasalMetabolicRate from './BasalMetabolicRate';
+import OneRepMax from './OneRepMax';
+import ProgressTracker from './ProgressTracker';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -20,6 +24,10 @@ export default function App() {
           <Route path='/' element={<Welcome />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/bmrcalculator' element={<BasalMetabolicRate />} />
+          <Route path='/onerepmax' element={<OneRepMax />} />
+          <Route path='/progresstracker' element={<ProgressTracker />} />
         </Routes>
       </userContext.Provider>
     </div>

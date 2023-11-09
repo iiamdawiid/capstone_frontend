@@ -1,14 +1,16 @@
-import { Link } from 'react-router-dom';
 import React, { useContext, useState } from 'react'
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from '../userContext';
 import { auth, provider } from '../firebaseConfig';
 import { signInWithPopup } from 'firebase/auth';
-import toast from 'react-hot-toast';
+
 
 export default function Login() {
     const { user, setUser } = useContext(userContext)
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const API_URL = import.meta.env.VITE_API_BACKEND_URL;
 
@@ -32,6 +34,7 @@ export default function Login() {
             setUser(username);
             localStorage.setItem("user", username)
             toast.success(`Logged in! Welcome back ${username}`);
+            navigate('/home');
         } else {
             toast.error("Incorrect login credentials.")
         }
@@ -43,6 +46,7 @@ export default function Login() {
         setUser(user);
         localStorage.setItem("user", user)
         toast.success(`Logged in! Welcome back ${user}`);
+        navigate('/home');
     }
 
     return (
