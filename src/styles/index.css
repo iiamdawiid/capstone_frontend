@@ -138,3 +138,9 @@
     font-size: 20px;
     color: white;
 }
+
+.bmr-table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

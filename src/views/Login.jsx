@@ -31,8 +31,13 @@ export default function Login() {
             })
         });
         if (response.ok) {
+            const responseData = await response.json();
+            const authToken = responseData.token;
+
             setUser(username);
             localStorage.setItem("user", username)
+            localStorage.setItem("token", authToken)
+
             toast.success(`Logged in! Welcome back ${username}`);
             navigate('/home');
         } else {
@@ -63,12 +68,6 @@ export default function Login() {
                 </div>
                 <p>Sign in with your account</p>
                 <form className='reg-form mt-1'>
-                    {/* <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-primary-content">
-                            Email
-                        </label>
-                        <input onChange={(e) => setEmail(e.target.value)} type="text" name="email" id="email" className="input input-bordered input-info max-w-md mt-2" />
-                    </div> */}
                     <div>
                         <label htmlFor="username" className="block text-sm font-medium text-primary-content mt-9">
                             Username

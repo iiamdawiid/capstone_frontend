@@ -10,17 +10,17 @@ export default function BasalMetabolicRate() {
   const [age, setAge] = useState(0);
   const [bmr, setBMR] = useState(0); // for when user decides to save bmr calculation
   const [toggleSwitch, setToggleSwitch] = useState("");
-  const [isCaloriesSaved, setIsCaloriesSaved] = useState(false);
-
-  const API_URL = import.meta.env.VITE_API_BACKEND_URL;
 
   const toggle = () => {
     setToggleSwitch(prevToggle => prevToggle === "ON" ? "" : "ON");
   }
 
+
+  // create function to call backend and store bmr if user wants to save
+
+
   const bmrForm = (e) => {
     e.preventDefault();
-    setIsCaloriesSaved(false);
     if (gender && activityLevel && weight && height && age) {
       if (gender === "male") {
         if (toggleSwitch) {
@@ -61,49 +61,6 @@ export default function BasalMetabolicRate() {
     } else {
       const result = ((4.536 * weight) + (15.88 * height) - (5 * age) - 161) * parseFloat(activityLevel);
       setBMR(parseInt(result));
-    }
-  }
-
-  const handleSaveBMR = async (e) => {
-    e.preventDefault();
-    setIsCaloriesSaved(true);
-    const response = await fetch(`${API_URL}/bmrcalculator/save_calories`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem('token')}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "gender": gender,
-        "activity_level": activityLevel,
-        "weight": weight,
-        "height": height,
-        "age": age,
-        "units": "METRIC",
-        "calories": bmr,
-        "gain_weight1": bmr + 275,
-        "gain_weight2": bmr + 550,
-        "gain_weight3": bmr + 1100,
-        "lose_weight1": bmr - 275,
-        "lose_weight2": bmr - 550,
-        "lose_weight3": bmr - 1100
-      }),
-    });
-
-    const data = await response.json();
-    console.log(data); // temp
-    toast.success('Results have been saved')
-  };
-
-  const saveButton = () => {
-    if (isCaloriesSaved) {
-      return null;
-    } else {
-      return (
-        <div className="flex justify-center items-center">
-          <button onClick={handleSaveBMR} className="btn btn-success rounded inline-block mt-2 mb-2 ml-8 drop-shadow-lg glow-btn"><strong>SAVE</strong></button>
-        </div>
-      )
     }
   }
 
@@ -166,7 +123,7 @@ export default function BasalMetabolicRate() {
               </div>
             </form>
           </div>
-          <div className="w-1/2 pl-4 flex flex-col items-center mt-4">
+          <div className="w-1/2 pl-4 flex flex-col items-center mt-8">
             <p className="text-3xl text-white font-bold" style={{ textDecoration: 'underline', textShadow: '4px 4px #000000' }}>RESULTS</p>
             {bmr ? (
               <>
@@ -175,11 +132,12 @@ export default function BasalMetabolicRate() {
                 <h1 className="mt-10 text-green-600 text-2xl font-bold">Gain Weight</h1>
                 {toggleSwitch ? (
                   <>
-                    <div className="overflow-x-auto w-11/12 mr-10">
+                    <div className="bmr-table overflow-x-auto w-9/12 mx-auto">
                       <table className="table">
                         {/* head */}
                         <thead>
                           <tr>
+                            <th></th>
                             <th>Rate</th>
                             <th>Calories</th>
                           </tr>
@@ -187,16 +145,19 @@ export default function BasalMetabolicRate() {
                         <tbody>
                           {/* row 1 */}
                           <tr>
+                            <th></th>
                             <td>+ 0.50 lb/week</td>
                             <td>{parseInt(bmr + 250)}</td>
                           </tr>
                           {/* row 2 */}
                           <tr>
+                            <th></th>
                             <td>+ 1.00 lb/week</td>
                             <td>{parseInt(bmr + 500)}</td>
                           </tr>
                           {/* row 3 */}
                           <tr>
+                            <th></th>
                             <td>+ 2.00 lb/week</td>
                             <td>{parseInt(bmr + 1000)}</td>
                           </tr>
@@ -206,11 +167,12 @@ export default function BasalMetabolicRate() {
                   </>
                 ) : (
                   <>
-                    <div className="overflow-x-auto w-11/12 flex mr-10">
+                    <div className="bmr-table overflow-x-auto w-9/12 mx-auto">
                       <table className="table">
                         {/* head */}
                         <thead>
                           <tr>
+                            <th></th>
                             <th>Rate</th>
                             <th>Calories</th>
                           </tr>
@@ -218,16 +180,19 @@ export default function BasalMetabolicRate() {
                         <tbody>
                           {/* row 1 */}
                           <tr>
+                            <th></th>
                             <td>+ 0.25 kg/week</td>
                             <td>{parseInt(bmr + 275)}</td>
                           </tr>
                           {/* row 2 */}
                           <tr>
+                            <th></th>
                             <td>+ 0.50 kg/week</td>
                             <td>{parseInt(bmr + 550)}</td>
                           </tr>
                           {/* row 3 */}
                           <tr>
+                            <th></th>
                             <td>+ 1.00 kg/week</td>
                             <td>{parseInt(bmr + 1100)}</td>
                           </tr>
@@ -239,11 +204,12 @@ export default function BasalMetabolicRate() {
                 <h1 className="mt02 text-red-400 text-2xl font-bold">Lose Weight</h1>
                 {toggleSwitch ? (
                   <>
-                    <div className="overflow-x-auto w-11/12 mr-10">
+                    <div className="bmr-table overflow-x-auto w-9/12 mx-auto">
                       <table className="table">
                         {/* head */}
                         <thead>
                           <tr>
+                            <th></th>
                             <th>Rate</th>
                             <th>Calories</th>
                           </tr>
@@ -251,31 +217,34 @@ export default function BasalMetabolicRate() {
                         <tbody>
                           {/* row 1 */}
                           <tr>
+                            <th></th>
                             <td>- 0.50 lb/week</td>
                             <td>{parseInt(bmr - 250)}</td>
                           </tr>
                           {/* row 2 */}
                           <tr>
+                            <th></th>
                             <td>- 1.00 lb/week</td>
                             <td>{parseInt(bmr - 500)}</td>
                           </tr>
                           {/* row 3 */}
                           <tr>
+                            <th></th>
                             <td>- 2.00 lb/week</td>
                             <td>{parseInt(bmr - 1000)}</td>
                           </tr>
                         </tbody>
                       </table>
-                      {saveButton()}
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className="overflow-x-auto w-11/12 mr-10">
+                    <div className="bmr-table overflow-x-auto w-9/12 mx-auto">
                       <table className="table">
                         {/* head */}
                         <thead>
                           <tr>
+                            <th></th>
                             <th>Rate</th>
                             <th>Calories</th>
                           </tr>
@@ -283,29 +252,31 @@ export default function BasalMetabolicRate() {
                         <tbody>
                           {/* row 1 */}
                           <tr>
+                            <th></th>
                             <td>- 0.25 kg/week</td>
                             <td>{parseInt(bmr - 275)}</td>
                           </tr>
                           {/* row 2 */}
                           <tr>
+                            <th></th>
                             <td>- 0.50 kg/week</td>
                             <td>{parseInt(bmr - 550)}</td>
                           </tr>
                           {/* row 3 */}
                           <tr>
+                            <th></th>
                             <td>- 1.00 kg/week</td>
                             <td>{parseInt(bmr - 1100)}</td>
                           </tr>
                         </tbody>
                       </table>
-                      {saveButton()}
                     </div>
                   </>
                 )}
               </>
             ) : (
               <>
-                <h1 className="mt-56 text-white text-xl">No results to show.</h1>
+                <h1 className="mt-44 text-white text-xl">No results to show.</h1>
                 <h1 className="mt-5 text-white text-xl">To see your calories, complete the form.</h1>
               </>
             )}
@@ -330,5 +301,5 @@ export default function BasalMetabolicRate() {
         </dialog>
       </div>
     </>
-  )
+  );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 export default function OneRepMax() {
@@ -7,34 +8,29 @@ export default function OneRepMax() {
   const [reps, setReps] = useState(0);
   const [toggleSwitch, setToggleSwitch] = useState("");
   const [oneRepMax, setOneRepMax] = useState(0);
+  const navigate = useNavigate();
 
   const toggle = () => {
     setToggleSwitch(prevToggle => prevToggle === "ON" ? "" : "ON");
   }
 
-
-  // create ability to save 1rm calculation
-
-
   const oneRepMaxForm = (e) => {
     e.preventDefault();
     if (liftType, weight, reps) {
-      if (toggleSwitch) {
-        handleImperialCalculation();
-      } else {
-        handleMetricCalculation();
-      }
+      handleCalculation();
     } else {
       toast.error("All form fields must be filled")
     }
   }
 
-  const handleImperialCalculation = () => {
-    setOneRepMax(() => (weight / 2.20462) / (1.0278 - 0.0278 * reps));
+  const handleCalculation = () => {
+    setOneRepMax(() => weight / (1.0278 - 0.0278 * reps))
   }
 
-  const handleMetricCalculation = () => {
-    setOneRepMax(() => weight / (1.0278 - 0.0278 * reps))
+  const handleSaveMax = () => {
+    // create ability to save 1rm calculation
+    // create flask backend to store this info
+    return
   }
 
   return (
@@ -47,8 +43,8 @@ export default function OneRepMax() {
             <p className="mt-3 text-white">
               A higher amount of completed reps will result in a more inaccurate estimate. Do not enter more than 10 reps.
               To maximize accuracy, pick a weight that is sufficiently heavy but not too light. Completing a heavier weight for
-              3 reps will be more accurate than completing a lighter weight for 8 reps. If your result is negative, it means that
-              the combination of weight and number of reps is not compatible and usually means the reps are too high for that weight.
+              3 reps will be more accurate than completing a lighter weight for 8 reps. If your result is negative or lower than the input weight,
+              it means that the combination of weight and number of reps is not compatible and usually means the reps are too high for that weight.
             </p>
           </div>
         </div>
@@ -87,63 +83,123 @@ export default function OneRepMax() {
           </div>
         </form>
       </div>
-      {oneRepMax && (
+      {oneRepMax !== null && oneRepMax > 0 && (
         <div className="centered-container-1rm rounded">
           <h1 className="text-center text-4xl font-bold text-white" style={{ backgroundColor: 'black', color: 'white', padding: '20px 0', margin: '0', textAlign: 'center' }}>One Rep Max Calculator</h1>
-          <div className="text-center mt-5">
-            <h2 className="text-white font-bold text-3xl" style={{ textDecoration: 'underline' }}>ESTIMATED MAX</h2>
-            <p className="mt-5 text-3xl font-bold text-green-400">{parseInt(oneRepMax)} kg</p>
-          </div>
-          <div className="overflow-x-auto mt-6 w-9/12 flex m-auto">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>% of 1RM</th>
-                  <th>Weight (kg)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>100%</td>
-                  <td>Quality Control Specialist</td>
-                </tr>
-                <tr>
-                  <td>95%</td>
-                  <td>Desktop Support Technician</td>
-                </tr>
-                <tr>
-                  <td>90%</td>
-                  <td>Tax Accountant</td>
-                </tr>
-                <tr>
-                  <td>85%</td>
-                  <td>Tax Accountant</td>
-                </tr>
-                <tr>
-                  <td>80%</td>
-                  <td>Tax Accountant</td>
-                </tr>
-                <tr>
-                  <td>75%</td>
-                  <td>Tax Accountant</td>
-                </tr>
-                <tr>
-                  <td>70%</td>
-                  <td>Tax Accountant</td>
-                </tr>
-                <tr>
-                  <td>65%</td>
-                  <td>Tax Accountant</td>
-                </tr>
-                <tr>
-                  <td>60%</td>
-                  <td>Tax Accountant</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          {toggleSwitch ? (
+            <>
+              <div className="text-center mt-5">
+                <h2 className="text-white font-bold text-3xl" style={{ textDecoration: 'underline' }}>ESTIMATED MAX</h2>
+                <p className="mt-5 text-3xl font-bold text-green-400">{parseInt(oneRepMax)} lbs</p>
+              </div>
+              <div className="overflow-x-auto mt-6 w-9/12 flex m-auto">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>% of 1RM</th>
+                      <th>Weight (lbs)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>100%</td>
+                      <td>{parseInt(oneRepMax)}</td>
+                    </tr>
+                    <tr>
+                      <td>95%</td>
+                      <td>{parseInt(oneRepMax * 0.95)}</td>
+                    </tr>
+                    <tr>
+                      <td>90%</td>
+                      <td>{parseInt(oneRepMax * 0.90)}</td>
+                    </tr>
+                    <tr>
+                      <td>85%</td>
+                      <td>{parseInt(oneRepMax * 0.85)}</td>
+                    </tr>
+                    <tr>
+                      <td>80%</td>
+                      <td>{parseInt(oneRepMax * 0.80)}</td>
+                    </tr>
+                    <tr>
+                      <td>75%</td>
+                      <td>{parseInt(oneRepMax * 0.75)}</td>
+                    </tr>
+                    <tr>
+                      <td>70%</td>
+                      <td>{parseInt(oneRepMax * 0.70)}</td>
+                    </tr>
+                    <tr>
+                      <td>65%</td>
+                      <td>{parseInt(oneRepMax * 0.65)}</td>
+                    </tr>
+                    <tr>
+                      <td>60%</td>
+                      <td>{parseInt(oneRepMax * 0.60)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="text-center mt-5">
+                <h2 className="text-white font-bold text-3xl" style={{ textDecoration: 'underline' }}>ESTIMATED MAX</h2>
+                <p className="mt-5 text-3xl font-bold text-green-400">{parseInt(oneRepMax)} kg</p>
+              </div>
+              <div className="overflow-x-auto mt-6 w-9/12 flex m-auto">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>% of 1RM</th>
+                      <th>Weight (lbs)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>100%</td>
+                      <td>{parseInt(oneRepMax)}</td>
+                    </tr>
+                    <tr>
+                      <td>95%</td>
+                      <td>{parseInt(oneRepMax * 0.95)}</td>
+                    </tr>
+                    <tr>
+                      <td>90%</td>
+                      <td>{parseInt(oneRepMax * 0.90)}</td>
+                    </tr>
+                    <tr>
+                      <td>85%</td>
+                      <td>{parseInt(oneRepMax * 0.85)}</td>
+                    </tr>
+                    <tr>
+                      <td>80%</td>
+                      <td>{parseInt(oneRepMax * 0.80)}</td>
+                    </tr>
+                    <tr>
+                      <td>75%</td>
+                      <td>{parseInt(oneRepMax * 0.75)}</td>
+                    </tr>
+                    <tr>
+                      <td>70%</td>
+                      <td>{parseInt(oneRepMax * 0.70)}</td>
+                    </tr>
+                    <tr>
+                      <td>65%</td>
+                      <td>{parseInt(oneRepMax * 0.65)}</td>
+                    </tr>
+                    <tr>
+                      <td>60%</td>
+                      <td>{parseInt(oneRepMax * 0.60)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
           <div className="flex justify-center items-center">
-            <button className="btn btn-wide btn-circle btn-info rounded inline-block mt-3 mb-5 drop-shadow-lg glow-btn"><strong>Calculate</strong></button>
+            <button onClick={() => setOneRepMax(0)} className="btn btn-warning rounded inline-block mt-3 mb-5 mr-10 drop-shadow-lg glow-btn"><strong>BACK</strong></button>
+            <button onClick={handleSaveMax} className="btn btn-success rounded inline-block mt-3 mb-5 drop-shadow-lg glow-btn"><strong>SAVE</strong></button>
           </div>
         </div>
       )}

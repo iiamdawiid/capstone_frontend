@@ -11,6 +11,7 @@ export default function Navbar() {
     const handleLogout = () => {
         setUser(null);
         localStorage.removeItem("user");
+        localStorage.removeItem("token")
         toast.success('You have been logged out')
         navigate('/');
 

@@ -38,8 +38,14 @@ export default function Register() {
             });
             // const data = await response.json();
             // console.log(data);
-            navigate('/login');
-            toast.success("Success! Account has been created");
+            if (response.ok) {
+                navigate('/login');
+                toast.success("Success! Account has been created");
+            } else {
+                toast.error("Invalid register. Please try again");
+            }
+        } else {
+            toast.error('Passwords do not match');
         }
     }
 
