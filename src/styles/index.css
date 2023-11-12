@@ -144,3 +144,26 @@
     align-items: center;
     justify-content: center;
 }
+
+.food-nutrition-container {
+    width: 90%;
+    height: 87%;
+    background-color: #4f46e5;
+    border: 2px solid black;
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.food-nutrition-container h1 {
+    font-size: 50px;
+    color: white;
+    text-shadow: 4px 4px #000000;
+    font-weight: bold;
+}
+
+.search-box {
+    width: 400px;
+}

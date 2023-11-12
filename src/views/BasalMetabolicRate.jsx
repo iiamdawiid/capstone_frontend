@@ -8,6 +8,7 @@ export default function BasalMetabolicRate() {
   const [weight, setWeight] = useState(0);
   const [height, setHeight] = useState(0);
   const [age, setAge] = useState(0);
+  const [units, setUnits] = useState("");
   const [bmr, setBMR] = useState(0); // for when user decides to save bmr calculation
   const [toggleSwitch, setToggleSwitch] = useState("");
   const [isCaloriesSaved, setIsCaloriesSaved] = useState(false);
@@ -15,8 +16,12 @@ export default function BasalMetabolicRate() {
   const API_URL = import.meta.env.VITE_API_BACKEND_URL;
 
   const toggle = () => {
-    setToggleSwitch(prevToggle => prevToggle === "ON" ? "" : "ON");
-  }
+    setToggleSwitch((prevToggle) => {
+      const newToggle = prevToggle === "ON" ? "" : "ON";
+      setUnits(newToggle === "ON" ? "IMPERIAL" : "METRIC");
+      return newToggle;
+    });
+  };
 
   const bmrForm = (e) => {
     e.preventDefault();
@@ -53,13 +58,13 @@ export default function BasalMetabolicRate() {
   }
 
   const handleImperialBMR = (sex) => {
-    // equation men: BMR = 4.536 * W + 15.88 * H - 5A + 5
-    // equation woman: BMR = 4.536 * W + 15.88 * H - 5A - 161
+    const weightInKg = weight / 2.20462;
+    const heightInCm = height * 2.54;
     if (sex === "male") {
-      const result = ((4.536 * weight) + (15.88 * height) - (5 * age) + 5) * parseFloat(activityLevel);
+      const result = ((10 * weightInKg) + (6.25 * heightInCm) - (5 * age) + 5) * parseFloat(activityLevel);
       setBMR(parseInt(result));
     } else {
-      const result = ((4.536 * weight) + (15.88 * height) - (5 * age) - 161) * parseFloat(activityLevel);
+      const result = ((10 * weightInKg) + (6.25 * heightInCm) - (5 * age) - 161) * parseFloat(activityLevel);
       setBMR(parseInt(result));
     }
   }
@@ -67,6 +72,7 @@ export default function BasalMetabolicRate() {
   const handleSaveBMR = async (e) => {
     e.preventDefault();
     setIsCaloriesSaved(true);
+
     const response = await fetch(`${API_URL}/bmrcalculator/save_calories`, {
       method: "POST",
       headers: {
@@ -79,7 +85,7 @@ export default function BasalMetabolicRate() {
         "weight": weight,
         "height": height,
         "age": age,
-        "units": "METRIC",
+        "units": toggleSwitch === "ON" ? "IMPERIAL" : "METRIC",
         "calories": bmr,
         "gain_weight1": bmr + 275,
         "gain_weight2": bmr + 550,
@@ -89,10 +95,13 @@ export default function BasalMetabolicRate() {
         "lose_weight3": bmr - 1100
       }),
     });
-
-    const data = await response.json();
-    console.log(data); // temp
-    toast.success('Results have been saved')
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data); // temp
+      toast.success('Results have been saved');
+    } else {
+      toast.error('Error saving results');
+    }
   };
 
   const saveButton = () => {
@@ -126,11 +135,11 @@ export default function BasalMetabolicRate() {
                   <option selected>Select Activity Level</option>
                   <option value="1.00">Basal Metabolic Rate (BMR)</option>
                   <option value="1.20">Sedentary</option>
-                  <option value="1.35">Light</option>
-                  <option value="1.50">Moderate</option>
-                  <option value="1.65">Active</option>
-                  <option value="1.80">Very Active</option>
-                  <option value="1.95">Extra Active</option>
+                  <option value="1.375">Light</option>
+                  <option value="1.55">Moderate</option>
+                  <option value="1.725">Active</option>
+                  <option value="1.9">Very Active</option>
+                  {/* <option value="1.95">Extra Active</option> */}
                 </select>
               </div>
               <div className="flex flex-col items-center text-white">

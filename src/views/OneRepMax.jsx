@@ -8,14 +8,22 @@ export default function OneRepMax() {
   const [reps, setReps] = useState(0);
   const [toggleSwitch, setToggleSwitch] = useState("");
   const [oneRepMax, setOneRepMax] = useState(0);
-  const navigate = useNavigate();
+  const [units, setUnits] = useState("");
+  const [isMaxSaved, setIsMaxSaved] = useState(false);
+
+  const API_URL = import.meta.env.VITE_API_BACKEND_URL;
 
   const toggle = () => {
-    setToggleSwitch(prevToggle => prevToggle === "ON" ? "" : "ON");
-  }
+    setToggleSwitch((prevToggle) => {
+      const newToggle = prevToggle === "ON" ? "" : "ON";
+      setUnits(newToggle === "ON" ? "IMPERIAL" : "METRIC");
+      return newToggle;
+    });
+  };
 
   const oneRepMaxForm = (e) => {
     e.preventDefault();
+    setIsMaxSaved(false);
     if (liftType, weight, reps) {
       handleCalculation();
     } else {
@@ -27,10 +35,51 @@ export default function OneRepMax() {
     setOneRepMax(() => weight / (1.0278 - 0.0278 * reps))
   }
 
-  const handleSaveMax = () => {
-    // create ability to save 1rm calculation
-    // create flask backend to store this info
-    return
+  const handleSaveMax = async (e) => {
+    e.preventDefault();
+    setIsMaxSaved(true);
+
+    const response = await fetch(`${API_URL}/onerepmax/save_onerepmax`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "type_of_lift": liftType,
+        "weight": weight,
+        "reps": reps,
+        "units": toggleSwitch === "ON" ? "IMPERIAL" : "METRIC",
+        "one_rep_max": parseInt(oneRepMax),
+        "percentage1": parseInt(oneRepMax * 0.95),
+        "percentage2": parseInt(oneRepMax * 0.90),
+        "percentage3": parseInt(oneRepMax * 0.85),
+        "percentage4": parseInt(oneRepMax * 0.80),
+        "percentage5": parseInt(oneRepMax * 0.75),
+        "percentage6": parseInt(oneRepMax * 0.70),
+        "percentage7": parseInt(oneRepMax * 0.65),
+        "percentage8": parseInt(oneRepMax * 0.60)
+      })
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data); // temp
+      toast.success('Results have been saved');
+    } else {
+      toast.error('Error saving results');
+    }
+  };
+
+  const saveButton = () => {
+    if (isMaxSaved) {
+      return null;
+    } else {
+      return (
+        <div className="flex justify-center items-center">
+          <button onClick={handleSaveMax} className="btn btn-success rounded inline-block mt-2 mb-2 ml-8 drop-shadow-lg glow-btn"><strong>SAVE</strong></button>
+        </div>
+      )
+    }
   }
 
   return (
@@ -199,7 +248,7 @@ export default function OneRepMax() {
           )}
           <div className="flex justify-center items-center">
             <button onClick={() => setOneRepMax(0)} className="btn btn-warning rounded inline-block mt-3 mb-5 mr-10 drop-shadow-lg glow-btn"><strong>BACK</strong></button>
-            <button onClick={handleSaveMax} className="btn btn-success rounded inline-block mt-3 mb-5 drop-shadow-lg glow-btn"><strong>SAVE</strong></button>
+            {saveButton()}
           </div>
         </div>
       )}

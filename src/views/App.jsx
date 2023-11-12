@@ -9,7 +9,7 @@ import { Toaster } from 'react-hot-toast';
 import Home from './Home';
 import BasalMetabolicRate from './BasalMetabolicRate';
 import OneRepMax from './OneRepMax';
-import ProgressTracker from './ProgressTracker';
+import FoodNutrition from './FoodNutrition';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -27,7 +27,7 @@ export default function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/bmrcalculator' element={<BasalMetabolicRate />} />
           <Route path='/onerepmax' element={<OneRepMax />} />
-          <Route path='/progresstracker' element={<ProgressTracker />} />
+          <Route path='/foodnutrition' element={<FoodNutrition />} />
         </Routes>
       </userContext.Provider>
     </div>

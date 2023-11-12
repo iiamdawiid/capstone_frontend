@@ -78,16 +78,16 @@ export default function Home() {
                 </Link>
             </div>
             <div className="flex justify-center">
-                <Link to='/progresstracker'>
+                <Link to='/foodnutrition'>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 rounded bg-indigo-900 text-secondary-content place-content-center w-screen hover" style={{ height: '500px' }}>
                         <div className="w-9/12 ml-40 h-96" style={{ boxShadow: '20px 30px 10px #000000' }}>
                             <img src={treadmill} alt="Food Image" className="w-full h-auto" />
                         </div>
                         <div className="ml-48">
-                            <h1 id="PT" className='text-4xl font-bold' style={{textShadow: '4px 4px #000000'}}>Progress Tracker</h1>
-                            <p className="w-full md:w-3/4 mt-28 text-xl">
-                                The progress tracker will allow you to keep track of whatever you would like. Training weight, body weight, meals, anything goes. To use it, click 
-                                on this row to be taken to the page.
+                            <h1 id="PT" className='text-4xl font-bold' style={{textShadow: '4px 4px #000000'}}>Food Nutrition</h1>
+                            <p className="w-full md:w-3/4 mt-20 text-xl">
+                                This tool will allow you to look up any food item and get information about its composition. The amount of calories, proteins, fats, and carbs are the things that you will
+                                be able to see. Knowing the nutritional composition of your food is an important part in determining the right steps to get to your goal.
                             </p>
                         </div>
                     </div>
