@@ -10,6 +10,7 @@ import Home from './Home';
 import BasalMetabolicRate from './BasalMetabolicRate';
 import OneRepMax from './OneRepMax';
 import FoodNutrition from './FoodNutrition';
+import EditProfile from './EditProfile';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -22,6 +23,7 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Welcome />} />
+          <Route path='/editprofile' element={<EditProfile />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/home' element={<Home />} />

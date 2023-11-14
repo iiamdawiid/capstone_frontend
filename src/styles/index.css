@@ -167,3 +167,53 @@
 .search-box {
     width: 400px;
 }
+
+.form-container-search {
+    width: 60%;
+    padding: 20px;
+}
+
+.centered-container-editprofile {
+    width: 60%;
+    height: 82%;
+    background-color: #4f46e5;
+    border: 2px solid black;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+.form-container-editprofile input {
+    width: 600px;
+}
+
+.form-container-editprofile h1 {
+    font-size: 40px;
+    color: white;
+    text-shadow: 4px 4px #000000;
+    font-weight: bold;
+}
+
+.btn-delete-profile {
+    background-color: rgb(185, 10, 10);
+    color: white;
+    border: none;
+}
+
+.btn-delete-profile:hover {
+    background-color: rgb(185, 10, 10);
+    box-shadow: 0 0 5px 3px rgb(255, 230, 0);
+}
+
+.btn-save-changes {
+    background-color: rgb(8, 150, 8);
+    color: white;
+    border: none;
+}
+.btn-save-changes:hover {
+    background-color: rgb(8, 150, 8);
+    color: white;
+    box-shadow: 0 0 5px 3px rgb(30, 255, 0);
+}
