@@ -1,37 +1,87 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 export default function FoodNutrition() {
-    const [maxCalories, setMaxCalories] = useState("");
-    const [maxProtein, setMaxProtein] = useState("");
-    const [maxCarbs, setMaxCarbs] = useState("");
-    const [maxFat, setMaxFat] = useState("");
+    const [foodData, setFoodData] = useState([]);
     const [foodName, setFoodName] = useState("");
+    const [calories, setCalories] = useState(0);
+    const [servingSize, setServingSize] = useState(0);
+    const [protein, setProtein] = useState(0);
+    const [fat, setFat] = useState(0);
+    const [carbs, setCarbs] = useState(0);
+    
+    const BACKEND_API_URL = import.meta.env.VITE_API_BACKEND_URL;
 
     const fetchData = async () => {
-        const apiKey = 'b25c545350cc4fc2aa4d66705c89774d'; // Replace with your actual API key
-        const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?query=${foodName}&maxProtein=${maxProtein}&maxFat=${maxFat}&maxCarbs=${maxCarbs}&maxCalories=${maxCalories}&number=2&apiKey=${apiKey}`;
+        const apiKey = '6ntVu135EYe8nhMazZrOew==Vl1uaFbkk5TQF8xP';
+        const apiUrl = `https://api.api-ninjas.com/v1/nutrition?query=${foodName}`;
 
         try {
-            const response = await fetch(apiUrl);
+            const response = await fetch(apiUrl, {
+                headers: {
+                    'X-Api-Key': apiKey,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
             const data = await response.json();
-            // setFoodData(data.results);
-            console.log(data.results)
+            setFoodData(data);
+            console.log(foodData)
         } catch (error) {
-            console.error(error);
-            // setFoodData(null);
+            console.error('Request failed:', error.message);
         }
     };
 
     useEffect(() => {
         fetchData();
-    }, [foodName, maxProtein, maxFat, maxCarbs, maxCalories]);
+    }, [foodName]);
+
+    const handleSaveFood = async (e) => {
+        e.preventDefault();
+
+        if (foodData.length > 0) {
+            const foodItem = foodData[0];
+
+            setServingSize(foodItem.serving_size_g);
+            setCalories(foodItem.calories);
+            setProtein(foodItem.protein_g);
+            setFat(foodItem.fat_total_g);
+            setCarbs(foodItem.carbohydrates_total_g);
+        }
+        // backend request
+        const response = await fetch(`${BACKEND_API_URL}/foodnutrition/save_food_nutrition`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "food_name": foodName,
+                "serving_size": servingSize,
+                "calories": calories,
+                "protein": protein,
+                "fats": fat,
+                "carbs": carbs
+            })
+        });
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data); // temp delete later
+            toast.success(`Nutrition for ${foodName} has been saved`)
+        } else {
+            toast.error('Error saving results');
+        }
+    }
 
     return (
-        <div className="food-nutrition-container mt-14 flex justify-center items-center" style={{ backgroundColor: 'grey' }}>
-            <h1 className="text-center">Food Nutrition</h1>
-            <div className="form-container-search" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <form>
-                    <div>
+        <div className="food-nutrition-container mt-14 flex" style={{ backgroundColor: 'grey' }}>
+            <div className="form-container-search" style={{ flex: 1, padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <h1 className="text-center mb-8">Food Nutrition</h1>
+                <form className="food-data-form">
+                    <div className="label-input-fn">
                         <label htmlFor="search" className="block">Food Item</label>
                         <input
                             className="search-box input input-bordered input-primary mr-10"
@@ -42,60 +92,44 @@ export default function FoodNutrition() {
                             name="search"
                             value={foodName}
                         />
-                    </div>
-                    <div>
-                        <label htmlFor="calories" className="block">Max Calories</label>
-                        <input
-                            className="search-box input input-bordered input-primary mr-10"
-                            onChange={(e) => setMaxCalories(e.target.value)}
-                            type="text"
-                            placeholder="Max Calories..."
-                            id="calories"
-                            name="calories"
-                            value={maxCalories}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="protein" className="block">Max Protein</label>
-                        <input
-                            className="search-box input input-bordered input-primary mr-10"
-                            onChange={(e) => setMaxProtein(e.target.value)}
-                            type="text"
-                            placeholder="Max Protein..."
-                            id="protein"
-                            name="protein"
-                            value={maxProtein}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="fat" className="block">Max Fat</label>
-                        <input
-                            className="search-box input input-bordered input-primary mr-10"
-                            onChange={(e) => setMaxFat(e.target.value)}
-                            type="text"
-                            placeholder="Max Fat..."
-                            id="fat"
-                            name="fat"
-                            value={maxFat}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="carb" className="block">Max Carb</label>
-                        <input
-                            className="search-box input input-bordered input-primary mr-10"
-                            onChange={(e) => setMaxCarbs(e.target.value)}
-                            type="text"
-                            placeholder="Max Carb..."
-                            id="carb"
-                            name="carb"
-                            value={maxCarbs}
-                        />
-                    </div>
-                    <div>
-                        <button onClick={() => fetchData()} className="btn btn-primary rounded inline-block mt-2 mb-2 drop-shadow-lg glow-btn">Search</button>
+                        <p className="mt-10">To find the nutrition facts about a certain food, simply just type inside the text box.</p>
                     </div>
                 </form>
             </div>
+            <div className="food-data-container" style={{ flex: 1, padding: '20px' }}>
+                <h1 className="text-center">Food Data</h1>
+                {foodData.length > 0 ? (
+                    <>
+                        <div className="food-data-card text-center">
+                            <ul>
+                                {foodData.map((foodItem) => (
+                                    <li key={foodItem.id}>
+                                        <h2 className="mt-5 text-white">Food Name</h2>
+                                        <p className="mb-3">{foodItem.name}, {foodItem.serving_size_g}g</p>
+                                        <hr />
+                                        <h2 className="mt-5 text-green-400">Calories</h2>
+                                        <p className="mb-3">{foodItem.calories}</p>
+                                        <hr />
+                                        <h2 className="mt-5 text-red-400">Protein (g)</h2>
+                                        <p className="mb-3">{foodItem.protein_g}</p>
+                                        <hr />
+                                        <h2 className="mt-5 text-yellow-400">Fats (g)</h2>
+                                        <p className="mb-3">{foodItem.fat_total_g}</p>
+                                        <hr />
+                                        <h2 className="mt-5 text-blue-500">Carbs (g)</h2>
+                                        <p>{foodItem.carbohydrates_total_g}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="text-center mt-3">
+                            <button onClick={handleSaveFood} className="btn btn-success rounded inline-block drop-shadow-lg glow-btn"><strong>SAVE</strong></button>
+                        </div>
+                    </>
+                ) : (
+                    <p className="text-center mt-48 text-2xl text-white">No nutrition information available for the specified food.</p>
+                )}
+            </div>
         </div>
-    )
+    );
 }

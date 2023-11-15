@@ -23,7 +23,7 @@ export default function Navbar() {
     return (
         <>
             {user || localStorageUser ? (
-                <div className="navbar bg-indigo-600" style={{width: '100vw'}}>
+                <div className="navbar bg-indigo-600" style={{ width: '100vw' }}>
                     <div className="navbar-start">
                         <div className="dropdown">
                             <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -31,7 +31,9 @@ export default function Navbar() {
                             </label>
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><Link to='/home'>Home</Link></li>
-                                <li><button onClick={handleLogout}>Logout</button></li>
+                                <li><Link to='/bmrcalculator'>BMR Calculator</Link></li>
+                                <li><Link to='/onerepmax'>ORM Calculator</Link></li>
+                                <li><Link to='/foodnutrition'>Nutrition Look-Up</Link></li>
                             </ul>
                         </div>
                     </div>
@@ -52,21 +54,29 @@ export default function Navbar() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <a className="justify-between">
+                                    <Link to="/savedcalories" className="justify-between">
                                         Saved Calories
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a className="justify-between">
+                                    <Link to="/savedmaxes" className="justify-between">
                                         Saved Maxes
-                                    </a>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/savedfoodnutrition" className="justify-between">
+                                        Saved Food Nutrition
+                                    </Link>
+                                </li>
+                                <li>
+                                    <button className="justify-between" onClick={handleLogout}>Logout</button>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             ) : (
-                <div className="navbar bg-indigo-600" style={{width: '100vw'}}>
+                <div className="navbar bg-indigo-600" style={{ width: '100vw' }}>
                     <div className="navbar-start">
                         <div className="dropdown">
                             <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -82,21 +92,6 @@ export default function Navbar() {
                         <Link to='/' className="btn btn-ghost normal-case text-xl">REVAMP<i className="fa-solid fa-fire-flame-curved"></i></Link>
                     </div>
                     <div className="navbar-end">
-                        {/* <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <i style={{ marginTop: '50%' }} className="fa-solid fa-circle-user fa-2xl"></i>
-                                </div>
-                            </label>
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                <li>
-                                    <a className="justify-between">
-                                        Profile
-                                    </a>
-                                </li>
-                                <li><a>Logout</a></li>
-                            </ul>
-                        </div> */}
                     </div>
                 </div>
             )}

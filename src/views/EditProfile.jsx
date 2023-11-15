@@ -12,7 +12,6 @@ export default function EditProfile() {
     const navigate = useNavigate();
 
     const API_URL = import.meta.env.VITE_API_BACKEND_URL;
-    // const API_URL = 'http://127.0.0.1:5000';
 
     const logoutUser = (isDeleted) => {
         if (isDeleted) {
@@ -117,6 +116,7 @@ export default function EditProfile() {
                             </label>
                             <input onChange={(e) => setConfirmEmail(e.target.value)} type="text" name="confirmEmail" id="confirmEmail" className="input input-bordered input-info mt-2" />
                         </div>
+                        <hr/>
                         <div>
                             <label htmlFor="username" className="block text-sm font-medium text-primary-content mt-5">
                                 Username
@@ -129,6 +129,7 @@ export default function EditProfile() {
                             </label>
                             <input onChange={(e) => setConfirmUsername(e.target.value)} type="text" name="confirmUsername" id="confirmUsername" className="input input-bordered input-info mt-2" />
                         </div>
+                        <hr/>
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-primary-content mt-5">
                                 Password

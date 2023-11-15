@@ -11,6 +11,9 @@ import BasalMetabolicRate from './BasalMetabolicRate';
 import OneRepMax from './OneRepMax';
 import FoodNutrition from './FoodNutrition';
 import EditProfile from './EditProfile';
+import SavedCalories from './SavedCalories';
+import SavedMaxes from './SavedMaxes';
+import SavedFoodNutrition from './SavedFoodNutrition'
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -30,6 +33,9 @@ export default function App() {
           <Route path='/bmrcalculator' element={<BasalMetabolicRate />} />
           <Route path='/onerepmax' element={<OneRepMax />} />
           <Route path='/foodnutrition' element={<FoodNutrition />} />
+          <Route path='/savedcalories' element={<SavedCalories />} />
+          <Route path='/savedmaxes' element={<SavedMaxes />} />
+          <Route path='/savedfoodnutrition' element={<SavedFoodNutrition />} />
         </Routes>
       </userContext.Provider>
     </div>
