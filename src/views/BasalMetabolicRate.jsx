@@ -46,8 +46,6 @@ export default function BasalMetabolicRate() {
   }
 
   const handleMetricBMR = (sex) => {
-    // equation men: BMR = 10W + 6.25H - 5A + 5
-    // equation woman: BMR = 10W + 6.25H - 5A - 161
     if (sex === "male") {
       const result = ((10 * weight) + (6.25 * height) - (5 * age) + 5) * parseFloat(activityLevel);
       setBMR(parseInt(result));
@@ -97,7 +95,6 @@ export default function BasalMetabolicRate() {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data); // temp
       toast.success('Results have been saved');
     } else {
       toast.error('Error saving results');
@@ -139,7 +136,6 @@ export default function BasalMetabolicRate() {
                   <option value="1.55">Moderate</option>
                   <option value="1.725">Active</option>
                   <option value="1.9">Very Active</option>
-                  {/* <option value="1.95">Extra Active</option> */}
                 </select>
               </div>
               <div className="flex flex-col items-center text-white">

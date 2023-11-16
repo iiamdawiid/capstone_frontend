@@ -74,7 +74,6 @@ export default function FoodNutrition() {
         });
         if (response.ok) {
             const data = await response.json();
-            console.log(data); // temp delete later
             toast.success(`Nutrition for ${foodName} has been saved`)
         } else {
             toast.error('Error saving results');

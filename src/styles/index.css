@@ -268,16 +268,12 @@
 
 .centered-container-savedcalories {
     width: 80%;
-    /* height: 82%; */
     min-height: 745px;
     background-color: #4f46e5;
     border: 2px solid black;
     position: relative;
     margin-top: 25px;
     margin-left: 190px;
-    /* top: 50%;
-    left: 50%; */
-    /* transform: translate(-50%, -50%); */
     border-radius: 10px;
     box-shadow: 0 0 20px 5px #fbbd23;
 }
@@ -325,16 +321,12 @@
 
 .centered-container-savedmaxes {
     width: 80%;
-    /* height: 82%; */
     min-height: 700px;
     background-color: #4f46e5;
     border: 2px solid black;
     position: relative;
     margin-top: 85px;
     margin-left: 190px;
-    /* top: 50%;
-    left: 50%; */
-    /* transform: translate(-50%, -50%); */
     border-radius: 10px;
     box-shadow: 0 0 20px 5px #fbbd23;
 }
@@ -368,16 +360,12 @@
 
 .centered-container-savednutrition {
     width: 80%;
-    /* height: 82%; */
     min-height: 670px;
     background-color: #4f46e5;
     border: 2px solid black;
     position: relative;
     margin-top: 85px;
     margin-left: 190px;
-    /* top: 50%;
-    left: 50%; */
-    /* transform: translate(-50%, -50%); */
     border-radius: 10px;
     box-shadow: 0 0 20px 5px #fbbd23;
 }

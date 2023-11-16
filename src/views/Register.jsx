@@ -36,8 +36,6 @@ export default function Register() {
                     "password": password
                 }),
             });
-            // const data = await response.json();
-            // console.log(data);
             if (response.ok) {
                 navigate('/login');
                 toast.success("Success! Account has been created");
@@ -52,7 +50,6 @@ export default function Register() {
     return (
         <div className="registration-container">
             <div className="form-container mb-10" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                {/* registration form here */}
                 <h1 className="mb-20">Sign Up For An Account</h1>
 
                 <form className="reg-form">
@@ -87,7 +84,6 @@ export default function Register() {
                 </form>
             </div>
             <div className="info-container" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                {/* text content here */}
                 <h1>Already have an account?</h1>
                 <p className="mt-6">Login now to get started!</p>
                 <button className="btn btn-wide btn-circle rounded inline-block mt-10 drop-shadow-lg glow-btn reg-btn-login"><Link to="/login">Login</Link></button>

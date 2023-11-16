@@ -62,7 +62,6 @@ export default function OneRepMax() {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data); // temp
       toast.success('Results have been saved');
     } else {
       toast.error('Error saving results');
@@ -97,7 +96,6 @@ export default function OneRepMax() {
           </div>
         </div>
         <form className="flex flex-col items-center mt-5">
-          {/* <h1 className="text-xl">Type Of Lift</h1> */}
           <label className="text-xl text-white" htmlFor="lift">Type of Lift</label>
           <select id="lift" className="select select-info w-full max-w-xs mt-1" value={liftType} onChange={(e) => setLiftType(e.target.value)}>
             <option>Select lift</option>

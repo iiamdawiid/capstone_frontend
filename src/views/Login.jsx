@@ -58,7 +58,6 @@ export default function Login() {
     return (
         <div className="registration-container">
             <div className="form-container mb-28" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                {/* registration form here */}
                 <h1 className='mb-5'>Login to Your Account</h1>
                 <h5>Login using Google</h5>
                 <button onClick={handleGoogleLogin}><i className="fa-brands fa-google-plus fa-3x mb-7 mt-7 google-icon" style={{ color: '#ff4d00' }}></i></button>
@@ -87,7 +86,6 @@ export default function Login() {
                 </form>
             </div>
             <div className="info-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                {/* text content here */}
                 <h1>Don't have an account yet?</h1>
                 <p className='mt-6'>Create one now and get started</p>
                 <p>on your fitness journey!</p>
