@@ -12,8 +12,8 @@ export default function Welcome() {
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
-                        <h1 className="mb-5 text-5xl font-bold text-primary-content">Start your journey!</h1>
-                        <p className="mb-5 text-primary-content">Click below to get started!</p>
+                        <h1 className="mb-5 text-5xl font-bold text-primary-content" style={{textShadow: '0px 0px 15px #6419e6'}}>Start your journey!</h1>
+                        <p className="mb-5 text-primary-content text-xl font-bold">Click below to get started!</p>
                         <button className="btn btn-primary btn-wide drop-shadow-lg glow-btn"><Link to='/register'>Get Started</Link></button>
                     </div>
                 </div>
@@ -26,7 +26,7 @@ export default function Welcome() {
                         </div>
                         <div className="ml-48">
                             <h1 className='text-4xl font-bold' style={{textShadow: '4px 4px #000000'}}>Calculating Calories</h1>
-                            <p className="w-full text-xl md:w-3/4 mt-14">
+                            <p className="w-full text-xl md:w-3/4 mt-10">
                                 Knowing where to start can be a difficult task. We can help you with any fitness goal whether it be losing weight or gaining muscle.
                                 Tracking your food intake is a crucial step in transforming your body as it provides valuable insights into your dietary habits and 
                                 helps you achieve your health and fitness goals. With our BMR Calorie Calculator, you will understand how many calories your body needs to 
@@ -60,11 +60,11 @@ export default function Welcome() {
                             <img src={loseWeight} alt="Food Image" />
                         </div>
                         <div className="ml-48">
-                            <h1 className='text-4xl font-bold' style={{textShadow: '4px 4px #000000'}}>Track Your Progress</h1>
-                            <p className="w-full md:w-3/4 text-xl mt-16">
-                                Whether your goal is to lose weight or gain muscle, it is essential to track your progress. Tracking your progress allows you to reflect on the past and determine trend lines which will keep you
-                                on the right track to reach your goals! By keeping track of your bodyweight, training weight, or whatever else you may think of, you will be able to take affirmative action and decide where you need
-                                to make adjustments if need be.
+                            <h1 className='text-4xl font-bold' style={{textShadow: '4px 4px #000000'}}>Food Nutrition Look-Up</h1>
+                            <p className="w-full md:w-3/4 text-xl mt-12">
+                                Through the use of the Nutrition API brought to you by API Ninjas, you can find out exactly how many calories are a part of your diet. Knowing how many calories you eat
+                                is paramount in ensuring you are progressing towards your goal. This nutritional tool will take all the guess work out of dieting and give you calorie approximations which
+                                you can use to track what you eat throughout the day. In doing so, you can be confident knowing you are improving each day and taking strides towards a better you.
                             </p>
                         </div>
                     </div>

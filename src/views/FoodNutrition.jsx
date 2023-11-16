@@ -9,10 +9,12 @@ export default function FoodNutrition() {
     const [protein, setProtein] = useState(0);
     const [fat, setFat] = useState(0);
     const [carbs, setCarbs] = useState(0);
-    
+    const [isFoodSaved, setIsFoodSaved] = useState(false);
+
     const BACKEND_API_URL = import.meta.env.VITE_API_BACKEND_URL;
 
     const fetchData = async () => {
+        setIsFoodSaved(false);
         const apiKey = '6ntVu135EYe8nhMazZrOew==Vl1uaFbkk5TQF8xP';
         const apiUrl = `https://api.api-ninjas.com/v1/nutrition?query=${foodName}`;
 
@@ -39,18 +41,21 @@ export default function FoodNutrition() {
         fetchData();
     }, [foodName]);
 
-    const handleSaveFood = async (e) => {
-        e.preventDefault();
-
+    useEffect(() => {
         if (foodData.length > 0) {
             const foodItem = foodData[0];
-
             setServingSize(foodItem.serving_size_g);
             setCalories(foodItem.calories);
             setProtein(foodItem.protein_g);
             setFat(foodItem.fat_total_g);
             setCarbs(foodItem.carbohydrates_total_g);
         }
+    }, [foodData]);
+
+    const handleSaveFood = async (e) => {
+        e.preventDefault();
+        setIsFoodSaved(true);
+
         // backend request
         const response = await fetch(`${BACKEND_API_URL}/foodnutrition/save_food_nutrition`, {
             method: "POST",
@@ -73,6 +78,18 @@ export default function FoodNutrition() {
             toast.success(`Nutrition for ${foodName} has been saved`)
         } else {
             toast.error('Error saving results');
+        }
+    }
+
+    const saveButton = () => {
+        if (isFoodSaved) {
+            return null;
+        } else {
+            return (
+                <div className="text-center mt-3">
+                    <button onClick={handleSaveFood} className="btn btn-success rounded inline-block drop-shadow-lg glow-btn"><strong>SAVE</strong></button>
+                </div>
+            )
         }
     }
 
@@ -122,9 +139,7 @@ export default function FoodNutrition() {
                                 ))}
                             </ul>
                         </div>
-                        <div className="text-center mt-3">
-                            <button onClick={handleSaveFood} className="btn btn-success rounded inline-block drop-shadow-lg glow-btn"><strong>SAVE</strong></button>
-                        </div>
+                        {saveButton()}
                     </>
                 ) : (
                     <p className="text-center mt-48 text-2xl text-white">No nutrition information available for the specified food.</p>

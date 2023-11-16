@@ -108,9 +108,10 @@
     background-color: #4f46e5;
     border: 2px solid black;
     position: absolute;
-    top: 55%;
+    top: 56%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px 5px white;
 }
 
 .bmr-form {
@@ -127,6 +128,7 @@
     top: 54%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px 5px white;
 }
 
 .table {
@@ -155,6 +157,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
+    box-shadow: 0 0 25px 15px #6419e6;
 }
 
 .food-nutrition-container h1 {
@@ -171,20 +174,21 @@
 .form-container-search {
     width: 60%;
     padding: 20px;
-    background-color: rgb(44, 43, 43);
+    background-color: rgb(56, 53, 53);
     border-radius: 6px;
 }
 
 .centered-container-editprofile {
-    width: 60%;
+    width: 50%;
     height: 82%;
-    background-color: #4f46e5;
+    background-color: #202020;
     border: 2px solid black;
     position: absolute;
-    top: 52%;
+    top: 53%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
+    box-shadow: 0 0 25px 12px #6419e6;
 }
 
 .form-container-editprofile input {
@@ -204,7 +208,7 @@
 }
 
 .btn-delete-profile {
-    background-color: rgb(185, 10, 10);
+    background-color: rgb(224, 54, 54);
     color: white;
     border: none;
 }
@@ -215,15 +219,15 @@
 }
 
 .btn-save-changes {
-    background-color: rgb(8, 150, 8);
+    background-color: #6419e6;
     color: white;
     border: none;
 }
 
 .btn-save-changes:hover {
-    background-color: rgb(8, 150, 8);
+    background-color: #6419e6;
     color: white;
-    box-shadow: 0 0 5px 3px rgb(30, 255, 0);
+    box-shadow: 0 0 5px 3px #ffffff;
 }
 
 .food-data-form label {
@@ -260,4 +264,153 @@
     padding: 20px;
     border-radius: 10px;
     margin-top: 80px;
+}
+
+.centered-container-savedcalories {
+    width: 80%;
+    /* height: 82%; */
+    min-height: 745px;
+    background-color: #4f46e5;
+    border: 2px solid black;
+    position: relative;
+    margin-top: 25px;
+    margin-left: 190px;
+    /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    border-radius: 10px;
+    box-shadow: 0 0 20px 5px #fbbd23;
+}
+
+.centered-container-savedcalories h1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    padding: 15px 0;
+}
+
+.saved-calories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.saved-calories-entry {
+    background-color: #2e2e2e;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    padding: 15px;
+    text-align: center;
+    list-style-type: none;
+    box-shadow: 10px 13px 10px #000000;
+}
+
+.weight-columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.gain-weight-column,
+.lose-weight-column {
+    flex-basis: 50%;
+}
+
+.del-cal-btn:hover {
+    box-shadow: 0 0 5px 3px rgb(255, 0, 0);
+}
+
+.centered-container-savedmaxes {
+    width: 80%;
+    /* height: 82%; */
+    min-height: 700px;
+    background-color: #4f46e5;
+    border: 2px solid black;
+    position: relative;
+    margin-top: 85px;
+    margin-left: 190px;
+    /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    border-radius: 10px;
+    box-shadow: 0 0 20px 5px #fbbd23;
+}
+
+.centered-container-savedmaxes h1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    padding: 15px 0;
+}
+
+.saved-maxes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.saved-maxes-entry {
+    background-color: #2e2e2e;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    padding: 15px;
+    text-align: center;
+    list-style-type: none;
+    box-shadow: 10px 13px 10px #000000;
+}
+
+.centered-container-savednutrition {
+    width: 80%;
+    /* height: 82%; */
+    min-height: 670px;
+    background-color: #4f46e5;
+    border: 2px solid black;
+    position: relative;
+    margin-top: 85px;
+    margin-left: 190px;
+    /* top: 50%;
+    left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    border-radius: 10px;
+    box-shadow: 0 0 20px 5px #fbbd23;
+}
+
+.centered-container-savednutrition h1 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    padding: 15px 0;
+}
+
+.saved-nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.saved-nutrition-entry {
+    background-color: #2e2e2e;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    padding: 15px;
+    text-align: center;
+    list-style-type: none;
+    box-shadow: 10px 13px 10px #000000;
+    width: 300px;
+}
+
+.saved-nutrition-entry hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

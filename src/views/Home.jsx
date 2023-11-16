@@ -38,14 +38,13 @@ export default function Home() {
                         <p className="mb-5 text-primary-content">Scroll down to get started!</p>
                         <button className="btn btn-primary btn-wide drop-shadow-lg glow-btn" onClick={() => smoothScrollTo("BMR")}>BMR CALCULATOR</button>
                         <button className="btn btn-primary btn-wide drop-shadow-lg glow-btn mt-5" onClick={() => smoothScrollTo("RMC")}>1RM CALCULATOR</button>
-                        <button className="btn btn-primary btn-wide drop-shadow-lg glow-btn mt-5" onClick={() => smoothScrollTo("PT")}>PROGRESS TRACKER</button>
+                        <button className="btn btn-primary btn-wide drop-shadow-lg glow-btn mt-5" onClick={() => smoothScrollTo("PT")}>NUTRITION LOOK-UP</button>
                     </div>
                 </div>
             </div>
             <div className="flex justify-center">
                 <Link to='/bmrcalculator'>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 rounded bg-indigo-600 text-primary-content place-content-center w-screen hover" style={{ height: '500px' }}>
-                        {/* <img src={foodTrack} alt="Image" className="w-9/12 ml-40 h-96" style={{ boxShadow: '25px 25px 10px #000000' }} /> */}
                         <div className="w-9/12 ml-40 h-96" style={{ boxShadow: '20px 30px 10px #000000' }}>
                             <img src={foodPic} alt="Food Image" />
                         </div>

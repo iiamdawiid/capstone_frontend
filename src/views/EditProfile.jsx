@@ -75,6 +75,10 @@ export default function EditProfile() {
                 clear = false;
             }
         }
+        if (!newEmail && !newUsername && !newPassword) {
+            toast.error("Cannot submit empty form");
+            clear = false;
+        }
         if (clear === true) {
             toast.success("SUCCESS")
             // call api to change info
@@ -108,36 +112,34 @@ export default function EditProfile() {
                             <label htmlFor="email" className="block text-sm font-medium text-primary-content mt-5">
                                 Email
                             </label>
-                            <input onChange={(e) => setNewEmail(e.target.value)} type="text" name="email" id="email" className="input input-bordered input-info mt-2" />
+                            <input onChange={(e) => setNewEmail(e.target.value)} type="text" name="email" id="email" className="input input-bordered input-primary mt-2" />
                         </div>
                         <div>
-                            <label htmlFor="confirmEmail" className="block text-sm font-medium text-primary-content mt-5">
+                            <label htmlFor="confirmEmail" className="block text-sm font-medium text-primary-content mt-1">
                                 Confirm Email
                             </label>
-                            <input onChange={(e) => setConfirmEmail(e.target.value)} type="text" name="confirmEmail" id="confirmEmail" className="input input-bordered input-info mt-2" />
+                            <input onChange={(e) => setConfirmEmail(e.target.value)} type="text" name="confirmEmail" id="confirmEmail" className="input input-bordered input-primary mt-2" />
                         </div>
-                        <hr/>
                         <div>
-                            <label htmlFor="username" className="block text-sm font-medium text-primary-content mt-5">
+                            <label htmlFor="username" className="block text-sm font-medium text-primary-content mt-10">
                                 Username
                             </label>
-                            <input onChange={(e) => setNewUsername(e.target.value)} type="text" name="username" id="username" className="input input-bordered input-info mt-2" />
+                            <input onChange={(e) => setNewUsername(e.target.value)} type="text" name="username" id="username" className="input input-bordered input-secondary mt-2" />
                         </div>
                         <div>
-                            <label htmlFor="confirmUsername" className="block text-sm font-medium text-primary-content mt-5">
+                            <label htmlFor="confirmUsername" className="block text-sm font-medium text-primary-content mt-1">
                                 Confirm Username
                             </label>
-                            <input onChange={(e) => setConfirmUsername(e.target.value)} type="text" name="confirmUsername" id="confirmUsername" className="input input-bordered input-info mt-2" />
+                            <input onChange={(e) => setConfirmUsername(e.target.value)} type="text" name="confirmUsername" id="confirmUsername" className="input input-bordered input-secondary mt-2" />
                         </div>
-                        <hr/>
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-primary-content mt-5">
+                            <label htmlFor="password" className="block text-sm font-medium text-primary-content mt-10">
                                 Password
                             </label>
                             <input onChange={(e) => setNewPassword(e.target.value)} type="password" name="password" id="password" className="input input-bordered input-info mt-2" />
                         </div>
                         <div>
-                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-primary-content mt-5">
+                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-primary-content mt-1">
                                 Confirm Password
                             </label>
                             <input onChange={(e) => setConfirmPassword(e.target.value)} type="password" name="confirmPassword" id="confirmPassword" className="input input-bordered input-info mt-2" />

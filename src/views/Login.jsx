@@ -50,6 +50,7 @@ export default function Login() {
         const user = result.user.displayName;
         setUser(user);
         localStorage.setItem("user", user)
+        localStorage.setItem("google_user", true);
         toast.success(`Logged in! Welcome back ${user}`);
         navigate('/home');
     }

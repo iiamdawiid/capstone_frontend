@@ -32,7 +32,7 @@ export default function Navbar() {
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                                 <li><Link to='/home'>Home</Link></li>
                                 <li><Link to='/bmrcalculator'>BMR Calculator</Link></li>
-                                <li><Link to='/onerepmax'>ORM Calculator</Link></li>
+                                <li><Link to='/onerepmax'>1RM Calculator</Link></li>
                                 <li><Link to='/foodnutrition'>Nutrition Look-Up</Link></li>
                             </ul>
                         </div>
